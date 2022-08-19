@@ -1,0 +1,307 @@
+== Windows11 Setup for Text Editing, Asciidoctor, etc
+
+=== Install Ruby on Windows
+
+If Ruby and its Devkit are not already installed, see
+https://jekyllrb.com/docs/installation/windows/[installtion via RubyInstall]. Be sure to install a version that contains the Devkit.
+When a window opens, choose the default options.
+
+==== Install Asciidoctor and Jekyll
+
+Next, open a Windows command prompt:
+
+[source, bash]
+----
+$ gem install asciidctor
+----
+
+[source, bash]
+----
+$ gem install jekyll bundler
+----
+
+It the will takes *several minutes to complete the jekyll install*!
+To check that the installation succeeded:
+
+[source, bash]
+----
+$ jekyll -v
+----
+
+Create `a` as a shorter version of `C:\Ruby31-x64\bin\asciidoctor` Install the https://github.com/darshandsoni/asciidoctor-skins[Asciidoctor skin]s
+collection of CSS stylesheets.
+
+=== Install Powershell 7.x+
+
+In order to install Chocolately and then Pandoc and Vim, first install Powershell 7 using these
+https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2#msi[instructions].
+
+Afterward pin *Powershell* to the Windows taskbar. Change its appearance to Campbell (or whatever desired).
+
+==== Install Chocolately
+
+Follow these https://chocolatey.org/install[instructions] to install
+chocolately in Powershell 7.
+
+*Note:* *.NET* is a chocolately prerequiste.
+
+==== Install Pandoc
+
+Run a Powershell terminal as Administrator and do
+
+[source, bash]
+----
+C:> choco install pandoc 
+----
+
+==== Install Vim
+
+Install Vim using choco. This enables you to run Gvim from both 1) Powershell, 2) Windows command prompt,
+and 3) the Windows desktop (using the Windows key). After optionally installing free monospace fonts to
+use with Vim.
+
+Install the https://github.com/haishanh/night-owl.vim[night owl theme]’s
+night-owl.colors/*night-owl.vim* file to `C:\users\kurtk\vimfiles\colors\`. The NERDTree plugin is availabe from
+github, too.
+
+Optioally install the https://github.com/preservim/nerdtree[NERDtree] plugin for Vim
+
+===== Configure Vim
+
+The current Vim configuration file can be found by entering
+
+[source, bash]
+----
+: echo $MYVIMRC
+----
+
+It is best to use the config file `C:\Users\kurtk\vomfile\vimrc`. You can
+also place the Windows vim configure files `C:\Users\kurtkC:\Users\kurtk`,
+and then name them *_gvimrc* and *_vimrc*. These will override the
+*vimrc* in vimfiles. The search order for the config files can be see
+using bu doing:
+
+[source, bash]
+----
+:version
+----
+
+The *C:\Users\kurtk\vimfiles* folder is equivalent to the Linux `~/.vim` folder.
+
+The `set guifont` syntax is different than Linux. Instead of 
+
+[source, bash]
+----
+set guifont=Lucida\ Sans\ typewriter\ Bold\ 9
+----
+
+on Windows use
+
+[source, bash]
+----
+set guifont=Lucida_Sans_Typewriter:h9:W600:cANSI:qDRAFT
+----
+
+===== Optionally Install Useful Fonts Monospace Fonts
+
+Other monospace fonts can be installed and configured for use in Vim.
+
+* Lucida Sans Typewriter
+* Fira Mono
+* Bitstream Vera Mono
+* Ubuntu
+
+You can go to ***Settings ***> **Personalization** > **Fonts**, and drag
+the font file into the **Add fonts** area. This works with multiple
+fonts as well.
+
+This is my `C:\Users\kurtk\vimfiles\gvimrc`:
+
+[source, bash]
+----
+set guifont=Lucida_Sans_Typewriter:h9:W600:cANSI:qDRAFT
+----
+
+and this is my `C:\Users\kurtk\vimfiles\vimrc`:
+
+[source, bash]
+----
+colo night-owl
+set lines=55 columns=230
+set belloff=all
+set nowrap
+syntax enable
+set number
+" Start NERDTree and put the cursor back in the other window. 
+“ autocmd VimEnter * NERDTree | wincmd p
+----
+
+===== Vim HowTos
+
+* Youtube video https://www.youtube.com/watch?v=ER5JYFKkYDg[Vim tutorial].
+
+* https://vimsheet.com/[Vim Cheatsheet]
+
+==== Asciidoc Documentation and Basic Asciidoctor Uusage
+
+https://asciidoctor.org/docs/asciidoc-writers-guide/[AsciiDoc Writer's Guide]
+
+The default AsciiDoctor ouput file type is `.html`. If you want `.pdf`, do:
+
+[source, bash]
+----
+C:\> a input-file.adoc -b pdf
+----
+
+To view interacitvely the apperance of an Asciidoc file, go to this tohttps://thetimetube.herokuapp.com/asciidoc/[Asciidoc Preview] webiste .
+
+==== Static Site Generators that Support Asciidoc
+
+This is a list of static site geneators that
+https://gist.github.com/briandominick/e5754cc8438dd9503d936ef65fffbb2d[support asciidoc] including Jeyll, the most popular.
+==== Optionally Install These Free Fonts
+
+These fonts are used in Asciidoctor-generate webpages (but I believe loaded remotely)
+
+* https://fonts.google.com/specimen/Open+Sans?query=Open+Sans#standard-styles[Open Sans]
+
+==== Optionally Install VS Code on Windows
+
+See https://code.visualstudio.com/Download
+
+Install the Asciidoctor code extension. Install night owl color theme.
+
+==== Optionally Install WSL2 and Ubuntu
+
+Install WSL2 from Powershell as administrator
+
+[source, bash]
+----
+PS C:\> wsl –-install
+----
+
+To update it:
+
+[source, bash]
+----
+PS C:\> wsl –-update
+----
+
+==== Execute Linux Commands from Powershell
+
+There are several basic commands, like *ls*, *mv*, and *cp*, work in
+Powershell. You can also prefix linux comands with *wsl*, in order to
+use them:
+
+[source, bash]
+----
+PS C:\Users\kurtk> wsl ls -alt ./*
+----
+
+You can view the WSL file system from Files Explorer by specifying the
+directory of *\\wsl$.*
+
+For details see https://docs.microsoft.com/en-us/windows/wsl/filesystems[Working across Windows and Linux file systems]
+
+==== Upgrading the Ubuntu Version Used in WSL
+
+To upgrade to the most recent Ubuntu version, you the same commands as
+an actual Ubuntu installation:
+
+[source, bash]
+----
+$ sudo apt update && sudo apt upgrade -y
+
+$ sudo do-release-upgrade
+----
+
+If rebooting is called for during the upgrade, you can “reboot” Ubuntu
+in Powershell:
+
+[source, bash]
+----
+PS C:\Users\kurtk> wsl --shutdown
+----
+
+and then repeat
+
+[source, bash]
+----
+$ sudo do-release-upgrade.
+----
+
+==== Configure WSL to Allow it to Create and Edit Windows Files
+
+Create the file C:\Users\kurtk\*wsl.conf *(or alternately
+*/etc/.wslconfig*) allows you to add to or override the default WSL
+settings. The WSL settings you can override in wsl.conf (and the
+differences between using wsl.conf and .wslconfig) are explained in
+https://docs.microsoft.com/en-us/windows/wsl/wsl-config[Advanced settings configuration in WSL].
+
+Now to allow WSL to create and eidt Windows files, add this seting to `C:\Users\kurtk\wsl.conf` and add: `options=”metadata”`
+
+**options=”metadata”** allows you to add or edit files found in, for example, `C:\Users\kurtk\Documents`.
+
+=== Powershell and Windows CLI Tips
+
+==== Powershell
+
+To display all environment variables and sort them by name: 
+
+[source, bash]
+----
+PS C:\> gci env:* | sort-object name
+----
+
+To print a specific variable in powershell:
+
+[source, bash]
+----
+PS C:\> echo env:ENVIRONMENT_VARIABLE
+----
+
+Example:
+
+[source, bash]
+----
+PS C:\> echo env:path
+----
+
+To remove a folder and its contents recursively and force the action:
+
+[source, bash]
+----
+PS C:\> Remove-Item <folder_name> -Recurse -Force
+----
+
+==== Windows Cmd Line
+
+To display all environment variables: 
+
+[source, bash]
+----
+PS C:\> set
+----
+
+[source, bash]
+----
+PS C:\> echo %enironment_variable%
+----
+
+Example:
+
+[source, bash]
+----
+PS C:\> echo %path%
+----
+
+To print a specific variable in powershell:
+
+To remove a folder and its contents recursively and force the action:
+
+[source, bash]
+----
+PS C:\> del /F /S <folder_name>
+----
+
+
