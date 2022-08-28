@@ -1,0 +1,21 @@
+This is what I have at the top of my .adoc files:
+
+[source]
+----
+:toc:
+:stylesheet: dark.css
+:stylesdir: /home/kurt/skins 
+:docinfo: shared
+:docinfodir: /home/kurt/docinfo
+----
+
+This is the content of my `/home/kurt/docinfo/docinfo.htm` file:
+
+[source, html]
+----
+<style>
+#header,#content,#footnotes,#footer{max-width:82.5em;} /* Asciidoctor stylesheets setting is 72.5em */
+</style>
+----
+
+This allows me to override the default width in the stylesheet.
