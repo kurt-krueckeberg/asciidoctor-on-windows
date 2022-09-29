@@ -7,6 +7,7 @@ This is what I have at the top of my .adoc files:
 :stylesdir: /home/kurt/skins 
 :docinfo: shared
 :docinfodir: /home/kurt/docinfo
+:nofooter:
 ----
 
 This is the content of my `/home/kurt/docinfo/docinfo.htm` file:
@@ -14,7 +15,7 @@ This is the content of my `/home/kurt/docinfo/docinfo.htm` file:
 [source, html]
 ----
 <style>
-#header,#content,#footnotes,#footer{max-width:82.5em;} /* Asciidoctor stylesheets setting is 72.5em */
+#header,#content,#footnotes,#footer{max-width:82.5em;} /* Asciidoctor stylesheets setting is 82.5em */
 </style>
 ----
 
